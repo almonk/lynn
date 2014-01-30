@@ -5,10 +5,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var redis = require("redis"),
-
-// Create redis client
-client = redis.createClient();
+var redis = require('redis-url').connect(process.env.REDISTOGO_URL);
 
 var app = express();
 
@@ -31,7 +28,7 @@ app.get('/shorten', function(req, res){
     shortened_id = makeid();
 
     // Save to redis
-    client.set(shortened_id, req.query.url, redis.print);
+    redis.set(shortened_id, req.query.url);
 
     res.send(
         {
@@ -43,9 +40,9 @@ app.get('/shorten', function(req, res){
 app.get('/:id', function(req, res){
     console.log("Lookup " + req.params.id);
 
-    client.get(req.params.id, function (err, reply) {
-        console.log("Found " + reply.toString());
-        res.redirect(reply.toString());
+    redis.get(req.params.id, function (err, value) {
+        console.log("Found " + value.toString());
+        res.redirect(value.toString());
     });
 });
 
