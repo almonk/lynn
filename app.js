@@ -37,6 +37,10 @@ app.get('/shorten', function(req, res){
     );
 });
 
+app.get('/', function(req, res){
+    res.redirect("http://alasdairmonk.com");
+});
+
 app.get('/:id', function(req, res){
     console.log("Lookup " + req.params.id);
 
