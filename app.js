@@ -5,6 +5,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var uniqueId = require('./uniqueid');
 var makeid = require('./makeid');
 var redis = require('redis-url').connect(process.env.REDISTOGO_URL);
 
@@ -26,17 +27,17 @@ app.get('/', function(req, res){
 });
 
 app.get('/shorten', function(req, res){
-    shortened_id = makeid(5);
+    uniqueId(5, function(shortened_id){
+        // Save to redis
+        redis.set(shortened_id, req.query.url);
 
-    // Save to redis
-    redis.set(shortened_id, req.query.url);
-
-    res.send(
-        {
-            shortened_url: base_url + shortened_id,
-            edit_token: makeid(22)
-        }
-    );
+        res.send(
+            {
+                shortened_url: base_url + shortened_id,
+                edit_token: makeid(22)
+            }
+        );
+    })
 });
 
 app.get('/:id', function(req, res){
