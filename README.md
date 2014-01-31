@@ -7,10 +7,10 @@ A little link shortener written in NodeJs for http://almonk.com
 
 Start redis then;
 
-<code>
+<pre>
    npm install<br>
    node app 
-</code>
+</pre>
 
 ### Use it
 
