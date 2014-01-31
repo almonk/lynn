@@ -19,30 +19,24 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 
 
-base_url = "http://almonk.com/" // Must end with /
+base_url = "http://almonk.com/" // Must end with '/'
 
-// development only
-// if ('development' == app.get('env')) {
-//     app.use(express.errorHandler());
-//     base_url = "http://0.0.0.0:3000/"
-// }
-
+app.get('/', function(req, res){
+    res.redirect("http://alasdairmonk.com");
+});
 
 app.get('/shorten', function(req, res){
-    shortened_id = makeid();
+    shortened_id = makeid(5);
 
     // Save to redis
     redis.set(shortened_id, req.query.url);
 
     res.send(
         {
-            shortened_url: base_url + shortened_id
+            shortened_url: base_url + shortened_id,
+            edit_token: makeid(22)
         }
     );
-});
-
-app.get('/', function(req, res){
-    res.redirect("http://alasdairmonk.com");
 });
 
 app.get('/:id', function(req, res){
