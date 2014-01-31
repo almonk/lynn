@@ -8,8 +8,8 @@ A little link shortener written in NodeJs for http://almonk.com
 Start redis then;
 
 <code>
-   npm install
+   npm install 
 </code>
 <code>
-   node app
+   node app 
 </code>
