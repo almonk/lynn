@@ -18,7 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 
-base_url = "http://almonk.com"
+
+base_url = "http://almonk.com/" // Must end with /
 
 // development only
 // if ('development' == app.get('env')) {
