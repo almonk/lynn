@@ -14,7 +14,7 @@ Start redis then;
 
 ### Use it
 
-Say we want to shorten gocardless.com...
+Say we want to shorten <code>gocardless.com</code>...
 
 <pre>http://almonk.com/shorten?url=http://gocardless.com</pre>
 
