@@ -21,10 +21,10 @@ app.use(express.methodOverride());
 base_url = "http://almonk.com"
 
 // development only
-if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
-    base_url = "http://0.0.0.0:3000/"
-}
+// if ('development' == app.get('env')) {
+//     app.use(express.errorHandler());
+//     base_url = "http://0.0.0.0:3000/"
+// }
 
 
 app.get('/shorten', function(req, res){
